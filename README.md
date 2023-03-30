@@ -6,10 +6,13 @@
   - [**tRPC**](https://trpc.io/): An alternative API to traditional REST or GraphQL
   - [**Prisma**](https://www.prisma.io/): [ORM](https://www.prisma.io/dataguide/types/relational/what-is-an-orm#what-is-an-orm)
   - [**Tailwind**](https://tailwindcss.com/): CSS framework
-    - [**Material Tailwind?**](https://www.material-tailwind.com/) : Tailwind component library
 - [**Cypress**](https://www.cypress.io/ ): Testing
 - [**Mantine**](https://mantine.dev/core/list/) A fully featured Reac components library.
 - [**Clerk**](https://clerk.com/): For authentication if we decide to implement that.
+
+### Utils
+- [**Iconify**](https://docs.iconify.design/icon-components/react/): Icons can be searched from [https://icones.js.org/](Icones)
+ 
  
 ### Hostin
 - [**Vercel**](https://vercel.com/)
