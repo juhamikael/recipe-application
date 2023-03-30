@@ -1,4 +1,5 @@
 ## Technologies & packages etc:
+### Developing
 - [T3 Stack](https://create.t3.gg/)
   - [**Typescript**](https://www.typescriptlang.org/)
   - [**Next.js**](https://nextjs.org/): Frontend
@@ -10,3 +11,6 @@
 - [**Mantine**](https://mantine.dev/core/list/) A fully featured Reac components library.
 - [**Clerk**](https://clerk.com/): For authentication if we decide to implement that.
  
+### Hostin
+- [**Vercel**](https://vercel.com/)
+- [**Railway?**](https://railway.app/)
