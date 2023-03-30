@@ -11,6 +11,9 @@
 - [**Mantine**](https://mantine.dev/core/list/) A fully featured Reac components library.
 - [**Clerk**](https://clerk.com/): For authentication if we decide to implement that.
  
+### Utils
+Iconify: Icons can be searched from https://icones.js.org/
+
 ### Hosting
 - [**Vercel**](https://vercel.com/)
 - [**Railway?**](https://railway.app/)
