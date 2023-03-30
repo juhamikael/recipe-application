@@ -11,6 +11,6 @@
 - [**Mantine**](https://mantine.dev/core/list/) A fully featured Reac components library.
 - [**Clerk**](https://clerk.com/): For authentication if we decide to implement that.
  
-### Hostin
+### Hosting
 - [**Vercel**](https://vercel.com/)
 - [**Railway?**](https://railway.app/)
