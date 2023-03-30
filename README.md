@@ -1,4 +1,4 @@
-# Recipe Application bootstrapped with [create-t3-app`](https://create.t3.gg/)
+# Recipe Application bootstrapped with [create-t3-app](https://create.t3.gg/)
 
 
 ## Technologies & packages etc:
