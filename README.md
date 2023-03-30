@@ -12,7 +12,7 @@
 - [**Clerk**](https://clerk.com/): For authentication if we decide to implement that.
  
 ### Utils
-[**Iconify**](https://docs.iconify.design/icon-components/react/): Icons can be searched from https://icones.js.org/
+- [**Iconify**](https://docs.iconify.design/icon-components/react/): Icons can be searched from https://icones.js.org/
 
 ### Hosting
 - [**Vercel**](https://vercel.com/)
