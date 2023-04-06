@@ -3,3 +3,33 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/*Root backround*/
+
+html {
+  background-color: #0f0f0f;
+  font-family: "Montserrat", sans-serif;
+  color: white;
+}
+
+.zoom {
+  transition: transform 0.2s;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+.zoom:hover {
+  transform: scale(1.05);
+}
+
+.zoom-minus {
+  transition: transform 0.2s;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+.zoom-minus:hover {
+  transform: scale(0.95);
+}
+.logo {
+  color: white;
+}
+.logo:hover {
+  color: hsl(280, 100%, 70%) !important;
+}
