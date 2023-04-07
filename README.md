@@ -13,10 +13,6 @@
 ### Utils
 - [**Iconify**](https://docs.iconify.design/icon-components/react/): Icons can be searched from [https://icones.js.org/](Icones)
  
- 
-### Utils
-- [**Iconify**](https://docs.iconify.design/icon-components/react/): Icons can be searched from https://icones.js.org/
-
 ### Hosting
 - [**Vercel**](https://vercel.com/)
 - [**Railway?**](https://railway.app/)
