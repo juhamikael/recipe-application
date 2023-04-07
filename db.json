@@ -1,0 +1,182 @@
+{
+  "how": {
+    "title": "How does it work?",
+    "content": [
+      {
+        "id": 1,
+        "icon": "material-symbols:search",
+        "title": "Search",
+        "content": "The app allow users to search for recipes by type of dish, recipe name and cooking time (e.g. less than 10 minutes, 30 minutes, 1 hour)."
+      },
+      {
+        "id": 2,
+        "icon": "fluent-mdl2:add-to-shopping-list",
+        "title": "Create shopping list",
+        "content": "The application let users to create shopping lists from recipes selected by the user."
+      },
+      {
+        "id": 3,
+        "icon": "material-symbols:library-add",
+        "title": "Add recipes",
+        "content": "The application provide step-by-step instructions for the preparation of recipes."
+      },
+      {
+        "id": 4,
+        "icon": "streamline:programming-browser-key-secure-password-window-browser-key-security-login",
+        "title": "Authentication",
+        "content": "The Authentication is done with Clerk. The user can sign up / in with Google or GitHub",
+        "readMore": "https://clerk.com/docs"
+      }
+    ]
+  },
+  "recipes": [
+    {
+      "id": 1,
+      "title": "Meatballs",
+      "cookTime": "30 min",
+      "ingredients": [
+        { "amount": "2 dl", "name": "water" },
+        { "amount": "1 dl", "name": "breadcrumbs" },
+        { "amount": "1 pc", "name": "onion" },
+        { "amount": "1 tbsp", "name": "oil" },
+        { "amount": "1 pc", "name": "egg" },
+        { "amount": "2 tsp", "name": "paprika powder" },
+        { "amount": "1 tsp", "name": "salt" },
+        { "amount": "½ tsp", "name": "black pepper" },
+        { "amount": "400 g", "name": "minced meat" }
+      ],
+      "instructions": [
+        {
+          "step": 1,
+          "text": "Bring the water to the boil. Add the breadcrumbs and stir. Bring to the boil, add the breadcrumbs, add the flour and mix."
+        },
+        {
+          "step": 2,
+          "text": "Chop the onion and fry in oil. Add the onion to the minced meat and stir."
+        }
+      ],
+      "restrictions": ["gluten", "lactose", "egg"],
+      "cuisine": "nordic",
+      "dishType": [{ "name": "lunch" }, { "name": "dinner" }],
+      "allergens": [{ "name": "egg" }, { "name": "gluten" }],
+      "vegan": false,
+      "rating": 3
+    },
+    {
+      "id": 2,
+      "title": "Meatballs",
+      "cookTime": "30 min",
+      "ingredients": [
+        { "amount": "2 dl", "name": "water" },
+        { "amount": "1 dl", "name": "breadcrumbs" },
+        { "amount": "1 pc", "name": "onion" },
+        { "amount": "1 tbsp", "name": "oil" },
+        { "amount": "1 pc", "name": "egg" },
+        { "amount": "2 tsp", "name": "paprika powder" },
+        { "amount": "1 tsp", "name": "salt" },
+        { "amount": "½ tsp", "name": "black pepper" },
+        { "amount": "400 g", "name": "minced meat" }
+      ],
+      "instructions": [
+        {
+          "step": 1,
+          "text": "Bring the water to the boil. Add the breadcrumbs and stir. Let the mixture sit for a few minutes to allow the breadcrumbs to absorb the water."
+        },
+        {
+          "step": 2,
+          "text": "Chop the onion and fry in oil until translucent. Add the fried onion to the breadcrumb mixture and stir to combine."
+        },
+        {
+          "step": 3,
+          "text": "Add the egg, paprika powder, salt, and black pepper to the breadcrumb mixture. Mix well to combine all the ingredients."
+        },
+        {
+          "step": 4,
+          "text": "Add the minced meat to the breadcrumb mixture and mix until everything is well combined."
+        },
+        {
+          "step": 5,
+          "text": "Form the mixture into small meatballs, ensuring they are uniform in size."
+        },
+        {
+          "step": 6,
+          "text": "Heat some oil in a frying pan over medium heat. Fry the meatballs, turning them frequently to cook them evenly until they are golden brown and cooked through."
+        },
+        {
+          "step": 7,
+          "text": "Serve the meatballs with your favorite side dish and enjoy."
+        }
+      ],
+      "restrictions": ["gluten", "lactose", "egg"],
+      "cuisine": "nordic",
+      "dishType": [{ "name": "lunch" }, { "name": "dinner" }],
+      "allergens": [{ "name": "egg" }, { "name": "gluten" }],
+      "vegan": false,
+      "rating": 5
+    },
+    {
+      "id": 3,
+      "title": "Meatballs",
+      "cookTime": "30 min",
+      "ingredients": [
+        { "amount": "2 dl", "name": "water" },
+        { "amount": "1 dl", "name": "breadcrumbs" },
+        { "amount": "1 pc", "name": "onion" },
+        { "amount": "1 tbsp", "name": "oil" },
+        { "amount": "1 pc", "name": "egg" },
+        { "amount": "2 tsp", "name": "paprika powder" },
+        { "amount": "1 tsp", "name": "salt" },
+        { "amount": "½ tsp", "name": "black pepper" },
+        { "amount": "400 g", "name": "minced meat" }
+      ],
+      "instructions": [
+        {
+          "step": 1,
+          "text": "Bring the water to the boil. Add the breadcrumbs and stir. Bring to the boil, add the breadcrumbs, add the flour and mix."
+        },
+        {
+          "step": 2,
+          "text": "Chop the onion and fry in oil. Add the onion to the minced meat and stir."
+        }
+      ],
+      "restrictions": ["gluten", "lactose", "egg"],
+      "cuisine": "nordic",
+      "dishType": [{ "name": "lunch" }, { "name": "dinner" }],
+      "allergens": [{ "name": "egg" }, { "name": "gluten" }],
+      "vegan": false,
+      "rating": 2.5
+    },
+    {
+      "id": 4,
+      "title": "Meatballs",
+      "cookTime": "30 min",
+      "ingredients": [
+        { "amount": "2 dl", "name": "water" },
+        { "amount": "1 dl", "name": "breadcrumbs" },
+        { "amount": "1 pc", "name": "onion" },
+        { "amount": "1 tbsp", "name": "oil" },
+        { "amount": "1 pc", "name": "egg" },
+        { "amount": "2 tsp", "name": "paprika powder" },
+        { "amount": "1 tsp", "name": "salt" },
+        { "amount": "½ tsp", "name": "black pepper" },
+        { "amount": "400 g", "name": "minced meat" }
+      ],
+      "instructions": [
+        {
+          "step": 1,
+          "text": "Bring the water to the boil. Add the breadcrumbs and stir. Bring to the boil, add the breadcrumbs, add the flour and mix."
+        },
+        {
+          "step": 2,
+          "text": "Chop the onion and fry in oil. Add the onion to the minced meat and stir."
+        }
+      ],
+      "restrictions": ["gluten", "lactose", "egg"],
+      "cuisine": "nordic",
+      "dishType": [{ "name": "lunch" }, { "name": "dinner" }],
+      "allergens": [{ "name": "egg" }, { "name": "gluten" }],
+      "vegan": false,
+      "rating": 1.5
+    }
+  ]
+}
