@@ -1,3 +1,4 @@
+import { UserButton, useUser } from "@clerk/nextjs";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
@@ -9,7 +10,7 @@ const Pages = [
 ];
 
 const Header = () => {
-  // Get active page
+  const { isSignedIn } = useUser();
   const router = useRouter();
   // Get page
   const { route } = router;
@@ -18,23 +19,34 @@ const Header = () => {
     <div className="border-b border-white/20 py-2">
       <header className="mx-8 flex justify-between text-sm text-white">
         <Link href="/" className="logo text-3xl font-extrabold tracking-tight">
-          Recipe <span className="text-[hsl(280,100%,70%)] ">App</span>
+          Recipe <span className="text-[hsl(280,100%,70%)] ">Radar</span>
         </Link>
-        <div className="flex items-center gap-6 py-2 text-base uppercase ">
-          {Pages.map((page) => (
-            // Set color for active page
+        <div className="flex items-center py-2 text-base uppercase ">
+          {Pages.map((page, index) => (
             <div key={page.key}>
-              <Link href={page.path} className="hover:text-blue-200 ">
-                <p
-                  className={`${
-                    route === page.path ? "font-bold text-blue-400" : ""
-                  }`}
-                >
-                  {page.name}
-                </p>
-              </Link>
+              {(isSignedIn || page.name !== "Create a Recipe") && (
+                <Link href={page.path} className="hover:text-blue-200 ">
+                  <p
+                    className={`${
+                      route === page.path ? "font-bold text-blue-400" : ""
+                    } ${index === 0 ? "" : "ml-4"}`}
+                  >
+                    {page.name}
+                  </p>
+                </Link>
+              )}
             </div>
           ))}
+          {!isSignedIn && (
+            <div className="ml-4">
+              <Link href="/sign-in">Sign In</Link>
+            </div>
+          )}
+          {isSignedIn && (
+            <div className="ml-4">
+              <UserButton />
+            </div>
+          )}
         </div>
       </header>
     </div>

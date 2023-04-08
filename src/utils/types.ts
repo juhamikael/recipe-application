@@ -2,6 +2,9 @@
 export interface IRecipe {
   id: number;
   title: string;
+  description: string;
+  createdBy: string;
+  createdAt: string;
   cookTime: string;
   ingredients: Array<{ amount: string; name: string }>;
   instructions: Array<{ step: number; text: string }>;

@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import axios from "axios";
 import { useEffect, useState, useCallback } from "react";
 import type { IRecipe } from "~/utils/types";
-import RecipeCard from "~/components/Recipe/SingleRecipe";
+import RecipeCard from "~/components/Recipe/get/SingleRecipe";
 
 const Recipe = () => {
   const [recipe, setRecipe] = useState<IRecipe | null>(null);
