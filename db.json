@@ -65,6 +65,9 @@
     {
       "id": 2,
       "title": "Meatballs",
+      "description": "These meatballs are easy to make and are a great way to use up leftover breadcrumbs.",
+      "createdBy": "John Doe",
+      "createdAt": "2021-05-01",
       "cookTime": "30 min",
       "ingredients": [
         { "amount": "2 dl", "name": "water" },
