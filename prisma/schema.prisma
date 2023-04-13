@@ -138,9 +138,3 @@ model Allergen {
 
     @@index([recipeId], name: "allergen_recipeId")
 }
-
-model Example {
-    id        String   @id @default(cuid())
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
-}

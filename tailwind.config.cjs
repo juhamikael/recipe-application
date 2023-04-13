@@ -7,6 +7,9 @@ const config = {
         "open-sans": ["Open Sans", "sans-serif"],
         montserrat: ["Montserrat", "sans-serif"],
       },
+      colors: {
+        "primary-100": "#0f0f0f",
+      },
     },
   },
   plugins: [],
