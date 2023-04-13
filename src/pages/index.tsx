@@ -1,7 +1,7 @@
 import { type NextPage } from "next";
 import Head from "next/head";
 import { Icon } from "@iconify/react";
-import { api } from "~/utils/api";
+
 import { Input, Switch, Rating } from "@mantine/core";
 import {
   allergens,
