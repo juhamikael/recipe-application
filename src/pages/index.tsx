@@ -140,6 +140,7 @@ const Home: NextPage = () => {
                 </div>
                 <Input placeholder="Search for a recipe" />
                 <button
+                  id="filter-button"
                   className="h-8 rounded-md bg-blue-700 text-sm hover:bg-blue-500"
                   onClick={() => setFilterOpen(!filterOpen)}
                 >

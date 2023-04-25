@@ -21,14 +21,6 @@ const HowData = [
   },
   {
     id: 2,
-    icon: "fluent-mdl2:add-to-shopping-list",
-    title: "Create shopping list",
-    content:
-      "The application let users to create shopping lists from recipes selected by the user.",
-    readMore: null,
-  },
-  {
-    id: 3,
     icon: "material-symbols:library-add",
     title: "Add recipes",
     content:
@@ -36,12 +28,20 @@ const HowData = [
     readMore: null,
   },
   {
-    id: 4,
+    id: 3,
     icon: "streamline:programming-browser-key-secure-password-window-browser-key-security-login",
     title: "Authentication",
     content:
-      "The Authentication is done with Clerk. The user can sign up / in with Google or GitHub",
+      "The Authentication is done with Clerk. The user can sign up / in with Email, Google or GitHub",
     readMore: "https://clerk.com/docs",
+  },
+  {
+    id: 4,
+    icon: "fluent-mdl2:add-to-shopping-list",
+    title: "Create shopping list",
+    content:
+      "TODO: The application let users to create shopping lists from recipes selected by the user.",
+    readMore: null,
   },
 ];
 

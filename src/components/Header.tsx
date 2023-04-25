@@ -25,7 +25,11 @@ const Header = () => {
           {Pages.map((page, index) => (
             <div key={page.key}>
               {(isSignedIn || page.name !== "Create a Recipe") && (
-                <Link href={page.path} className="hover:text-blue-200 ">
+                <Link
+                  href={page.path}
+                  className="hover:text-blue-200"
+                  id={page.key}
+                >
                   <p
                     className={`${
                       route === page.path ? "font-bold text-blue-400" : ""
@@ -39,7 +43,9 @@ const Header = () => {
           ))}
           {!isSignedIn && (
             <div className="ml-4">
-              <Link href="/sign-in">Sign In</Link>
+              <Link href="/sign-in" id="sign-in">
+                Sign In
+              </Link>
             </div>
           )}
           {isSignedIn && (
