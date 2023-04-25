@@ -10,12 +10,7 @@ import {
 import { AnimatePresence } from "framer-motion";
 import { useUser } from "@clerk/nextjs";
 import CustomSlider from "~/components/Slider";
-import {
-  allergens,
-  cuisines,
-  dishTypes,
-  restrictions,
-} from "~/utils/foodFilterData";
+import { allergens, cuisines, restrictions } from "~/utils/foodFilterData";
 import CustomSelect from "~/components/CustomSelect";
 import IngredientInput from "~/components/Recipe/create/IngredientInput";
 import InstructionInput from "~/components/Recipe/create/InstructionInput";
@@ -51,6 +46,13 @@ interface RecipeValues {
 const Create = () => {
   const { user } = useUser();
 
+  const [ingredients, setIngredients] = useState<Ingredient[]>([
+    { key: 0, showButton: true, showDelete: false },
+  ]);
+  const [instructions, setInstructions] = useState<Instruction[]>([
+    { key: 0, value: "", showButton: true, showDelete: false },
+  ]);
+
   const [recipeValues, setRecipeValues] = useState<RecipeValues>({
     createdBy: "",
     title: "",
@@ -61,32 +63,13 @@ const Create = () => {
     allergens: [],
     restrictions: [],
     vegan: false,
-    ingredients: [],
-    instructions: [],
+    ingredients: ingredients,
+    instructions: instructions,
   });
-
-  const [ingredients, setIngredients] = useState<Ingredient[]>([
-    { key: 0, showButton: true, showDelete: false },
-  ]);
-  const [instructions, setInstructions] = useState<Instruction[]>([
-    { key: 0, value: "", showButton: true, showDelete: false },
-  ]);
-
   const nextIngredientKey = useRef(1);
 
   console.log(user?.username);
   console.log("Recipe", recipeValues);
-  const addInstructionInput = () => {
-    const newKey = instructions.length;
-    setInstructions((prevState) => [
-      ...prevState.map((inst) => ({
-        ...inst,
-        showButton: false,
-        showDelete: true,
-      })),
-      { key: newKey, value: "", showButton: true, showDelete: true },
-    ]);
-  };
 
   useEffect(() => {
     if (user) {
@@ -97,6 +80,44 @@ const Create = () => {
       setRecipeValues((prevState) => ({ ...prevState, createdBy: nameToUse }));
     }
   }, [user]);
+
+  const addInstructionInput = () => {
+    const newKey = instructions.length;
+    setInstructions((prevState) => {
+      const updatedInstructions = [
+        ...prevState.map((inst) => ({
+          ...inst,
+          showButton: false,
+          showDelete: true,
+        })),
+        { key: newKey, value: "", showButton: true, showDelete: true },
+      ];
+      setRecipeValues({ ...recipeValues, instructions: updatedInstructions });
+      return updatedInstructions;
+    });
+  };
+
+  const filterDataForDatabase = (data: RecipeValues) => {
+    const filteredIngredients = data.ingredients.map(
+      ({ key, showButton, showDelete, ...ingredient }) => ingredient
+    );
+    const filteredInstructions = data.instructions.map(
+      ({ key, showButton, showDelete, ...instruction }) => instruction
+    );
+
+    return {
+      ...data,
+      ingredients: filteredIngredients,
+      instructions: filteredInstructions,
+    };
+  };
+
+  const submitRecipe = () => {
+    const filteredData = filterDataForDatabase(recipeValues);
+    console.log("Filtered Data", filteredData);
+    // Send filteredData to the database instead of recipeValues
+    // ...
+  };
 
   const updateInstruction = (key: number, value: string) => {
     setInstructions((prevState) => {
@@ -112,14 +133,18 @@ const Create = () => {
 
   const addIngredientInput = () => {
     const newKey = nextIngredientKey.current++;
-    setIngredients((prevState) => [
-      ...prevState.map((ing) => ({
-        ...ing,
-        showButton: false,
-        showDelete: true,
-      })),
-      { key: newKey, showButton: true, showDelete: true },
-    ]);
+    setIngredients((prevState) => {
+      const updatedIngredients = [
+        ...prevState.map((ing) => ({
+          ...ing,
+          showButton: false,
+          showDelete: true,
+        })),
+        { key: newKey, showButton: true, showDelete: true },
+      ];
+      setRecipeValues({ ...recipeValues, ingredients: updatedIngredients });
+      return updatedIngredients;
+    });
   };
 
   const removeInstructionInput = (key: number) => {
@@ -141,6 +166,7 @@ const Create = () => {
             rekeyedInstructions[0].showDelete = false;
           }
         }
+        setRecipeValues({ ...recipeValues, instructions: rekeyedInstructions });
 
         return rekeyedInstructions;
       });
@@ -166,11 +192,14 @@ const Create = () => {
           }
         }
 
+        setRecipeValues({ ...recipeValues, ingredients: updatedIngredients });
+
         return updatedIngredients;
       });
     } else {
       // If there's only one ingredient input left, reset its state and disable the delete button
       setIngredients([{ key: 0, showButton: true, showDelete: false }]);
+
       nextIngredientKey.current = 1;
     }
   };
@@ -185,6 +214,22 @@ const Create = () => {
     setRecipeValues((prevState) => ({ ...prevState, dishType: value }));
   };
 
+  const updateIngredient = (
+    key: number,
+    value: { ingredient: string; unit: string }
+  ) => {
+    setIngredients((prevState) => {
+      const updatedIngredients = prevState.map((ing) => {
+        if (ing.key === key) {
+          return { ...ing, ...value };
+        }
+        return ing;
+      });
+
+      setRecipeValues({ ...recipeValues, ingredients: updatedIngredients });
+      return updatedIngredients;
+    });
+  };
   return (
     <div>
       <StyledTabs defaultValue="recipe-basics" className="my-5">
@@ -192,6 +237,7 @@ const Create = () => {
           <Tabs.Tab value="recipe-basics">Recipe Basics</Tabs.Tab>
           <Tabs.Tab value="ingredients">Ingredients</Tabs.Tab>
           <Tabs.Tab value="instructions">Instructions</Tabs.Tab>
+          <Tabs.Tab value="submit">Submit</Tabs.Tab>
         </Tabs.List>
 
         <Tabs.Panel value="recipe-basics" pt="xs">
@@ -299,6 +345,7 @@ const Create = () => {
                     showButton={ingredient.showButton}
                     removeInput={() => removeIngredientInput(ingredient.key)}
                     ingredientsLength={ingredients.length}
+                    onChange={(key, value) => updateIngredient(key, value)}
                   />
                 ))}
               </AnimatePresence>
@@ -327,6 +374,11 @@ const Create = () => {
               </AnimatePresence>
             </div>
           </section>
+        </Tabs.Panel>
+        <Tabs.Panel value="submit" pt="xs">
+          <button className="bg-green-400 p-4" onClick={submitRecipe}>
+            Submit
+          </button>
         </Tabs.Panel>
       </StyledTabs>
     </div>

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { TextInput, Autocomplete } from "@mantine/core";
+import { TextInput, Autocomplete, NumberInput } from "@mantine/core";
 import { PlusCircledIcon } from "@radix-ui/react-icons";
 import { Icon } from "@iconify/react";
 import { motion } from "framer-motion";
@@ -10,6 +10,10 @@ type IProps = {
   removeInput: (key: number) => void;
   inputKey: number;
   ingredientsLength: number;
+  onChange: (
+    key: number,
+    value: { ingredient: string; amount: number; unit: string }
+  ) => void;
 };
 const unitOptions = [
   { label: "g", value: "g" },
@@ -24,14 +28,21 @@ const unitOptions = [
 const IngredientInput: React.FC<IProps> = ({
   addInput,
   inputKey,
+  onChange,
   removeInput,
   showButton,
   ingredientsLength,
 }) => {
-  const [selectedUnit, setSelectedUnit] = useState(unitOptions[0].value);
+  const [selectedUnit, setSelectedUnit] = useState<string>(
+    unitOptions[0]?.value || "g"
+  );
+
+  const [ingredient, setIngredient] = useState("");
+  const [amount, setAmount] = useState(0);
 
   const handleUnitChange = (value: string) => {
     setSelectedUnit(value);
+    onChange(inputKey, { ingredient: ingredient, amount: amount, unit: value });
   };
   const variants = {
     hidden: { opacity: 0, x: -50 },
@@ -48,17 +59,43 @@ const IngredientInput: React.FC<IProps> = ({
       <div className="flex flex-col gap-x-2">
         <section className="flex flex-row">
           <TextInput
-            placeholder="Ingredients"
+            placeholder="Ingredient"
             label={null}
             withAsterisk
             className="w-full"
+            onChange={(event) => {
+              setIngredient(event.target.value);
+              onChange(inputKey, {
+                ingredient: event.target.value,
+                amount: amount,
+                unit: selectedUnit,
+              });
+            }}
             styles={{
               input: {
                 borderRadius: "0.25rem 0 0 0.25rem",
               },
             }}
           />
-
+          <NumberInput
+            label={null}
+            placeholder="Amount"
+            className="w-30"
+            value={amount}
+            onChange={(value) => {
+              setAmount(value || 0);
+              onChange(inputKey, {
+                ingredient: ingredient,
+                amount: value || 0,
+                unit: selectedUnit,
+              });
+            }}
+            styles={{
+              input: {
+                borderRadius: "0 0 0 0",
+              },
+            }}
+          />
           <Autocomplete
             data={unitOptions}
             onChange={handleUnitChange}
