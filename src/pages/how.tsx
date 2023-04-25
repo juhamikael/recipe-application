@@ -8,6 +8,7 @@ type IContent = {
   content: string;
   title: string;
   readMore?: string | null;
+  readMore?: string | null;
 };
 
 const HowData = [
@@ -49,7 +50,11 @@ const How = () => {
   const theme = useMantineTheme();
 
   const [howTo, setHowTo] = useState<IContent[]>([]);
+  const [howTo, setHowTo] = useState<IContent[]>([]);
 
+  useEffect(() => {
+    setHowTo(HowData);
+  }, []);
   useEffect(() => {
     setHowTo(HowData);
   }, []);
@@ -61,6 +66,7 @@ const How = () => {
           {howTo && (
             <>
               <Title className="text-3xl font-bold text-white">
+                How does it work?
                 How does it work?
               </Title>
               <Accordion
@@ -92,6 +98,7 @@ const How = () => {
                 }}
               >
                 {Object.values(howTo).map((item) => (
+                {Object.values(howTo).map((item) => (
                   <Accordion.Item value={item.title} key={item.id}>
                     <Accordion.Control className="text-white">
                       <div className="w-full font-bold">
@@ -102,6 +109,7 @@ const How = () => {
                         </span>
                       </div>
                     </Accordion.Control>
+
 
                     <Accordion.Panel className="text-white">
                       <div className="w-full">{item.content}</div>

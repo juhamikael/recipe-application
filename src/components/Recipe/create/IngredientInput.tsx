@@ -3,6 +3,8 @@ import { TextInput, Autocomplete, NumberInput } from "@mantine/core";
 import { PlusCircledIcon } from "@radix-ui/react-icons";
 import { Icon } from "@iconify/react";
 import { motion } from "framer-motion";
+import { Icon } from "@iconify/react";
+import { motion } from "framer-motion";
 
 type IProps = {
   addInput: () => void;
