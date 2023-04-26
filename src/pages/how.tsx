@@ -40,7 +40,9 @@ const HowData = [
     icon: "fluent-mdl2:add-to-shopping-list",
     title: "Create shopping list",
     content:
+
       "TODO LATER: The application let users to create shopping lists from recipes selected by the user.",
+
     readMore: null,
   },
 ];

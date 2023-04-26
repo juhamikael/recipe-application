@@ -82,6 +82,7 @@ const Create = () => {
     instructions: instructions,
   });
   const nextIngredientKey = useRef(1);
+
   useEffect(() => {
     if (user) {
       const clerkUserName = user.username ? user.username : "";
@@ -122,12 +123,14 @@ const Create = () => {
       instructions: filteredInstructions,
     };
   };
+
   const filteredData = filterDataForDatabase(recipeValues);
   const { mutate } = api.createRecipe.create.useMutation();
 
   const submitRecipe = () => {
     console.log(filteredData);
     mutate(filteredData);
+
   };
 
   const updateInstruction = (key: number, value: string) => {
