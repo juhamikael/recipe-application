@@ -7,7 +7,7 @@ import { recipeRouter } from "~/server/api/routers/recipe";
  * All routers added in /api/routers should be manually added here.
  */
 export const appRouter = createTRPCRouter({
-  how: recipeRouter,
+  createRecipe: recipeRouter,
 });
 
 // export type definition of API

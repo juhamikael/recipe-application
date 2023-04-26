@@ -11,14 +11,18 @@ import {
   restrictionsIcons,
   times,
 } from "~/utils/foodFilterData";
+
 import CustomSlider from "~/components/Slider";
 import CustomSelect from "~/components/CustomSelect";
 import { useEffect, useState } from "react";
-import axios from "axios";
+
 import type { IRecipe, IRecipesProps } from "~/utils/types";
 import { Capitalize } from "~/utils/helpers";
 import Link from "next/link";
+import { api } from "~/utils/api";
 const Recipes: React.FC<IRecipesProps> = ({ recipes }) => {
+  // const hello = api.example.hello.useQuery({ text: "from tRPC" });
+
   return (
     <div className="mr-10 mt-10 grid h-fit grid-cols-2 gap-6 text-white ">
       {recipes &&
@@ -96,27 +100,78 @@ const Recipes: React.FC<IRecipesProps> = ({ recipes }) => {
 
 const Home: NextPage = () => {
   // const hello = api.example.hello.useQuery({ text: "from tRPC" });
-
   const [search, setSearch] = useState("");
   const [filterOpen, setFilterOpen] = useState(false);
   const [recipes, setRecipes] = useState<IRecipe[]>([]);
+  const { data, isLoading } = api.createRecipe.findMany.useQuery();
 
-  const getRecipes = () => {
-    axios
-      .get("http://localhost:3001/recipes")
-      .then((res) => {
-        setRecipes(res.data as IRecipe[]);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
+  const [filter, setFilter] = useState({
+    title: "",
+    time: 0,
+    dishType: [],
+    cuisine: [],
+    vegan: false,
+    allergens: [],
+  });
+
+  // .query(async ({ ctx, input }) => {
+  //   const recipes = await ctx.prisma.recipe.findMany({
+  //     where: {
+  //       title: {
+  //         contains: input.name,
+  //         mode: "insensitive",
+  //       },
+  //       cookTime: {
+  //         lte: input.cookTime,
+  //       },
+  //       dishType: {
+  //         equals: input.dishType,
+  //       },
+  //       cuisine: {
+  //         equals: input.cuisine,
+  //       },
+  //       allergens: {
+  //         hasEvery: input.allergens,
+  //       },
+  //       restrictions: {
+  //         hasEvery: input.restrictions,
+  //       },
+  //       vegan: {
+  //         equals: input.vegan,
+  //       },
+  //     },
+  //     include: {
+  //       ingredients: true,
+  //       instructions: true,
+  //     },
+  //   });
+
+  // const searchRecipe = api.createRecipe.
+
+  // if any of the filter fields change search
+  // useEffect(() => {
+  //   searchRecipe();
+  // }, [filter]);
+  // const filterRecipes = api.createRecipe.findByRules.useQuery({
+  //   title: filter.title,
+  //   time: filter.time,
+  //   dishType: filter.dishType,
+  //   cuisine: filter.cuisine,
+  //   vegan: filter.vegan,
+  //   allergens: filter.allergens,
+  // });
+
   useEffect(() => {
-    getRecipes();
-  }, []);
-  console.log(recipes);
+    if (!isLoading) {
+      setRecipes(data);
 
-  if (!recipes) return <div>Loading...</div>;
+      console.log("Recipes", recipes);
+    }
+  }, [data, isLoading]);
+
+  if (isLoading) return <div>Loading...</div>;
+
+  console.log("Recipes", data);
   return (
     <>
       <Head>

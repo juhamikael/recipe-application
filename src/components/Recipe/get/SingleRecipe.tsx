@@ -26,7 +26,7 @@ const RecipeCards: React.FC<IRecipesProps> = ({ recipe }) => {
 
   const rows = recipe?.ingredients.map((element) => (
     <tr key={element.name} className="hover:bg-white/10">
-      <td>{Capitalize(element.name)}</td>
+      <td>{element.name}</td>
       <td>{element.amount}</td>
     </tr>
   ));
