@@ -15,6 +15,7 @@ import CustomSelect from "~/components/CustomSelect";
 import IngredientInput from "~/components/Recipe/create/IngredientInput";
 import InstructionInput from "~/components/Recipe/create/InstructionInput";
 import { useRef } from "react";
+import { api } from "~/utils/api";
 
 interface Ingredient {
   key: number;
@@ -43,6 +44,20 @@ interface RecipeValues {
   instructions: Instruction[];
 }
 
+type Allergen =
+  | "gluten"
+  | "dairy"
+  | "peanuts"
+  | "tree_nuts"
+  | "soy"
+  | "shellfish"
+  | "fish"
+  | "eggs"
+  | "peanut"
+  | "tree_nut"
+  | "egg"
+  | "wheat";
+
 const Create = () => {
   const { user } = useUser();
 
@@ -60,16 +75,13 @@ const Create = () => {
     cookTime: 0,
     dishType: "",
     cuisine: "",
-    allergens: [],
+    allergens: [] as Allergen[],
     restrictions: [],
     vegan: false,
     ingredients: ingredients,
     instructions: instructions,
   });
   const nextIngredientKey = useRef(1);
-
-  console.log(user?.username);
-  console.log("Recipe", recipeValues);
 
   useEffect(() => {
     if (user) {
@@ -112,11 +124,13 @@ const Create = () => {
     };
   };
 
+  const filteredData = filterDataForDatabase(recipeValues);
+  const { mutate } = api.createRecipe.create.useMutation();
+
   const submitRecipe = () => {
-    const filteredData = filterDataForDatabase(recipeValues);
-    console.log("Filtered Data", filteredData);
-    // Send filteredData to the database instead of recipeValues
-    // ...
+    console.log(filteredData);
+    mutate(filteredData);
+
   };
 
   const updateInstruction = (key: number, value: string) => {
@@ -127,6 +141,11 @@ const Create = () => {
         }
         return inst;
       });
+      // Update recipeValues state with the updated instructions
+      setRecipeValues((prevRecipeValues) => ({
+        ...prevRecipeValues,
+        instructions: updatedInstructions,
+      }));
       return updatedInstructions;
     });
   };
@@ -205,12 +224,10 @@ const Create = () => {
   };
 
   const handleCookTime = (value: number) => {
-    console.log("Cook time", value);
     setRecipeValues((prevState) => ({ ...prevState, cookTime: value }));
   };
 
   const handleDishType = (value: string | number) => {
-    console.log("Dish type value:", value);
     setRecipeValues((prevState) => ({ ...prevState, dishType: value }));
   };
 
@@ -275,7 +292,7 @@ const Create = () => {
                 defaultValue={0}
                 steps={1}
                 value={recipeValues.cookTime}
-                onChange={(value) => handleCookTime(value)}
+                onChange={(value) => handleCookTime(value as number)}
                 max={120}
                 type="time"
               />
@@ -284,7 +301,7 @@ const Create = () => {
                 defaultValue={0}
                 steps={1}
                 max={4}
-                marks={["Breakfast", "Lunch", "Dinner", "Dessert", "Snack"]}
+                marks={["breakfast", "lunch", "dinner", "dessert", "snack"]}
                 value={recipeValues.dishType}
                 onChange={(value) => handleDishType(value)}
               />

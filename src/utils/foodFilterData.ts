@@ -10,11 +10,11 @@ const times = [
   { value: 100, label: "2h" },
 ];
 const dishTypes = [
-  { value: 0, label: "Breakfast" },
-  { value: 25, label: "Lunch" },
-  { value: 50, label: "Dinner" },
-  { value: 75, label: "Dessert" },
-  { value: 100, label: "Snack" },
+  { value: 0, label: "breakfast" },
+  { value: 25, label: "lunch" },
+  { value: 50, label: "dinner" },
+  { value: 75, label: "dessert" },
+  { value: 100, label: "snack" },
 ];
 
 const restrictions = [
@@ -24,7 +24,7 @@ const restrictions = [
 ];
 const allergens = [
   { value: "peanut", label: "Peanut" },
-  { value: "tree-nut", label: "Tree Nut" },
+  { value: "tree_nut", label: "Tree Nut" },
   { value: "egg", label: "Egg" },
   { value: "fish", label: "Fish" },
   { value: "shellfish", label: "Shellfish" },

@@ -11,102 +11,86 @@ datasource db {
 }
 
 enum DishTypeEnum {
-    BREAKFAST
-    LUNCH
-    DINNER
-    DESSERT
-    SNACK
+    breakfast
+    lunch
+    dinner
+    dessert
+    snack
 }
 
 enum RestrictionEnum {
-    GLUTEN
-    LACTOSE
-    EGG
+    gluten
+    lactose
+    egg
 }
 
 enum AllergenEnum {
-    GLUTEN
-    DAIRY
-    PEANUTS
-    TREE_NUTS
-    SOY
-    SHELLFISH
-    FISH
-    EGGS
-    PEANUT
-    TREE_NUT
-    EGG
-    WHEAT
+    gluten
+    dairy
+    peanuts
+    tree_nuts
+    soy
+    shellfish
+    fish
+    eggs
+    peanut
+    tree_nut
+    egg
+    wheat
 }
 
 enum CuisineEnum {
-    GLOBAL
-    AFRICAN
-    CHINESE
-    JAPANESE
-    KOREAN
-    VIETNAMESE
-    THAI
-    INDIAN
-    BRITISH
-    IRISH
-    FRENCH
-    ITALIAN
-    MEXICAN
-    SPANISH
-    MIDDLE_EASTERN
-    JEWISH
-    AMERICAN
-    CAJUN
-    SOUTHERN
-    GREEK
-    GERMAN
-    NORDIC
-    EASTERN_EUROPEAN
-    CARIBBEAN
-    LATIN_AMERICAN
-}
-
-model User {
-    id       String   @id @default(cuid())
-    email    String   @unique
-    password String
-    recipes  Recipe[]
+    global
+    african
+    chinese
+    japanese
+    korean
+    vietnamese
+    thai
+    indian
+    british
+    irish
+    french
+    italian
+    mexican
+    spanish
+    middle_eastern
+    jewish
+    american
+    cajun
+    southern
+    greek
+    german
+    nordic
+    eastern_european
+    caribbean
+    latin_american
 }
 
 model Recipe {
-    id           String        @id @default(cuid())
+    id           String            @id @default(cuid())
     title        String
     description  String
-    createdBy    User          @relation(fields: [createdById], references: [id])
-    createdById  String
-    createdAt    DateTime      @default(now())
-    cookTime     String
+    createdAt    DateTime          @default(now())
+    createdBy    String
+    cookTime     Int
     ingredients  Ingredient[]
     instructions Instruction[]
-    restrictions Restriction[]
+    restrictions RestrictionEnum[]
     cuisine      CuisineEnum
-    dishType     DishType[]
-    allergens    Allergen[]
+    dishType     DishTypeEnum[]
+    allergens    AllergenEnum[]
     vegan        Boolean
-    rating       Float
-}
-
-model Restriction {
-    id       String          @id @default(cuid())
-    name     RestrictionEnum @unique
-    recipeId String
-    recipe   Recipe          @relation(fields: [recipeId], references: [id])
-
-    @@index([recipeId], name: "restriction_recipeId")
+    rating       Float?
 }
 
 model Ingredient {
-    id       String @id @default(cuid())
-    amount   String
-    name     String
-    recipeId String
-    recipe   Recipe @relation(fields: [recipeId], references: [id])
+    id         String @id @default(cuid())
+    amount     Float
+    ingredient String
+    unit       String
+    recipeId   String
+    recipe     Recipe @relation(fields: [recipeId], references: [id])
 
     @@index([recipeId], name: "ingredient_recipeId")
 }
@@ -119,22 +103,4 @@ model Instruction {
     recipe   Recipe @relation(fields: [recipeId], references: [id])
 
     @@index([recipeId], name: "instruction_recipeId")
-}
-
-model DishType {
-    id       String       @id @default(cuid())
-    name     DishTypeEnum @unique
-    recipeId String
-    recipe   Recipe       @relation(fields: [recipeId], references: [id])
-
-    @@index([recipeId], name: "dishType_recipeId")
-}
-
-model Allergen {
-    id       String       @id @default(cuid())
-    name     AllergenEnum @unique
-    recipeId String
-    recipe   Recipe       @relation(fields: [recipeId], references: [id])
-
-    @@index([recipeId], name: "allergen_recipeId")
 }
